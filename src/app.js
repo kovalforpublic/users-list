@@ -1,14 +1,3 @@
-const tableRows = document.getElementsByTagName('tr');
-
-const firstActivateButton = document.querySelector('button');
-firstActivateButton.addEventListener('click', toggleStatus);
-
-const firstRemoveButton = document.querySelectorAll('button')[1];
-firstRemoveButton.addEventListener('click', removeUser);
-
-for (let i = tableRows.length - 1; i > 0; i--) {
-    tableRows[i].addEventListener('click', updateField);
-}
 const addButton = document.querySelector('form > button')
 addButton.addEventListener('click', addUser);
 
@@ -41,12 +30,16 @@ function generateTableRow(name, email, phone) {
 
     const activateBtn = generateActionButton('Activate');
     activateBtn.addEventListener('click', toggleStatus);
+
     const removeBtn = generateActionButton('Remove');
+    removeBtn.addEventListener('click', removeUser);
+
     const actionTD = generateTableData('', 'action');
     actionTD.appendChild(activateBtn);
     actionTD.appendChild(removeBtn);
 
     const tr = document.createElement('tr');
+    tr.addEventListener('click', updateField);
 
     tr.appendChild(nameTD);
     tr.appendChild(emailTD);
@@ -57,7 +50,6 @@ function generateTableRow(name, email, phone) {
 }
 function generateTableData(value, headers) {
     const td = document.createElement('td');
-    console.log('td: ', td);
     td.innerHTML = value;
     td.headers = headers;
     return td;
