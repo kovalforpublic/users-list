@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <!-- <style type="text/css">
+        input {
+            display: block;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 6px;
+        }
+        button {
+            padding: 10px;
+            margin: 5px;
+        }
+    </style> -->
+    <style>
+  table {
+    border-collapse: collapse;
+  }
+  table, td {
+    border: 1px solid #000;
+  }
+  td {
+    padding: 10px;
+  }
+  .form-row {
+    margin-bottom: 10px;
+  }
+</style>
+  </head>
+  <body>
+      <table>
+        <thead>
+          <tr>
+            <td>Name</td>
+            <td>Email</td>
+            <td>Phone</td>
+            <td>Activated</td>
+            <td>Action</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td headers="name">John Doe</td>
+            <td headers="email">johndoe@gmail.com</td>
+            <td headers="phone">+3 (455) 354-54-89</td>
+            <td headers="status">false</td>
+            <td headers="action"><button>Activate</button><button>Remove</button></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Add new user</h3>
+      <form>
+        <div class="form-row">
+          <label for="name">Name:</label>
+          <input id="name" for="name" type="text">
+        </div>
+        <div class="form-row">
+          <label for="email">Email:</label>
+          <input id="email" for="email" type="email">
+        </div>
+        <div class="form-row">
+          <label for="phone">Phone:</label>
+          <input id="phone" for="phone" type="text">
+        </div>
+        <button>Add user</button>
+      </form>
+      <script defer type="text/javascript" src="src/users.js"></script>
+    <script defer type="text/javascript" src="src/app.js"></script>
+  </body>
+</html>
