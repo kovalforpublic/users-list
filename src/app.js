@@ -5,13 +5,30 @@ const form = document.querySelector('form');
 const table = document.querySelector('table');
 const tbody = document.querySelector('tbody');
 
-function updateField() {
-    const td = event.target;
+function updateField(event) {
+    const td = event.target.closest('td');
+    const currentRow = event.target.closest('tr');
+    const statusTD = currentRow.querySelector('td[headers=status]');
     if (td.headers !== 'status' &&
         td.headers !== 'action' &&
         event.toElement.nodeName !== "BUTTON") {
             const newName = prompt('Enter new name: ', td.innerHTML);
             td.innerHTML = newName;
+        } else if (td.headers === 'action') {
+            const button = event.toElement;
+            switch (button.innerHTML) {
+                case 'Activate': 
+                    statusTD.innerHTML = 'true';
+                    button.innerHTML = 'Inactivate';
+                    break;
+                case 'Inactivate':
+                    statusTD.innerHTML = 'false';
+                    button.innerHTML = 'Activate';
+                    break;
+                case 'Remove':
+                    removeUser(currentRow);
+                    break;
+            }
         }
 }
 function addUser() {
@@ -29,10 +46,7 @@ function generateTableRow(name, email, phone) {
     const statusTD = generateTableData('false', 'status');
 
     const activateBtn = generateActionButton('Activate');
-    activateBtn.addEventListener('click', toggleStatus);
-
     const removeBtn = generateActionButton('Remove');
-    removeBtn.addEventListener('click', removeUser);
 
     const actionTD = generateTableData('', 'action');
     actionTD.appendChild(activateBtn);
@@ -59,20 +73,7 @@ function generateActionButton(title) {
     button.textContent = title;
     return button;
 }
-function toggleStatus() {
-    const currentRow = event.path[2];
-    const statusTD = currentRow.querySelector('td[headers=status]');
-
-    if (statusTD.innerHTML === 'true') {
-        statusTD.innerHTML = 'false';
-        this.textContent = 'activate'; // title for button
-    } else {
-        statusTD.innerHTML = 'true';
-        this.textContent = 'Inactivate';
-    }
-}
-function removeUser() {
-    const currentRow = event.path[2]
+function removeUser(currentRow) {
     const id = currentRow.rowIndex;
     table.deleteRow(id);
 }
